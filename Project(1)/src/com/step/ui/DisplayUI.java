@@ -3,13 +3,45 @@ import com.step.data.Employees;
 
 public class DisplayUI {
 
+    public static void readByIdMessage(){
+        System.out.println("Enter the id (index) :");
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void displayUpdateMenu(){
+        System.out.println("\n\n\n        *** Employee update values ***");
+        System.out.println("\n          1. Update name ");
+        System.out.println("          2. Update surname ");
+        System.out.println("          3. Update IDNP ");
+        System.out.println("          4. Update birth date ");
+        System.out.println("          5. Update employment date ");
+        System.out.println("          6. Update salary ");
+        System.out.println("          7. Update function ");
+        System.out.println("          8. Go back ");
+    }
+
     public static void displayMainMenu(){
         System.out.println("\n\n\n        *** Employee management ***");
         System.out.println("\n          1. Register new employees ");
-        System.out.println("          2. View all the employees ");
+        System.out.println("          2. View employees ");
         System.out.println("          3. Modify employee data ");
         System.out.println("          4. Fire an employee ");
+        System.out.println("          5. Exit ");
     }
+
+    public static void displaySearchMenu(){
+        System.out.println("\n\n\n        *** Employee search ***");
+        System.out.println("\n          1. Display every employee ");
+        System.out.println("          2. Search by name ");
+        System.out.println("          3. Search by surname ");
+        System.out.println("          4. Search by IDNP ");
+        System.out.println("          5. Go back ");
+    }
+
 
     public static void displayEmployeeDetails(Employees em){
         System.out.println("-----------"+em.getName()+' '+ em.getSurname()+"-----------");

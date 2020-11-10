@@ -1,30 +1,52 @@
 package com.step.data;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Employees {
 
-    //region properties
-    final String IDNP;
-    String name;
-    String surname;
-    LocalDate birthDate;
-    LocalDate employedOn;
-    public static enum GenderEnum{
+    //region enumDeclarations
+    public enum GenderEnum{
         Male,
         Female,
         Custom
     }
-    GenderEnum gender;
-    double salary;
-    public static enum FunctionsEnum{
-        SysEng,
-        NetEng,
-        SysAdmin,
-        ProjMan,
-        Helpdesk,
-        DesktopSupport,
+    public enum FunctionsEnum{
+        SysEng(1),
+        NetEng(2),
+        SysAdmin(3),
+        ProjMan(4),
+        Helpdesk(5),
+        DesktopSupport(6);
+
+        //region implementationForGettingValueBasedOnInt
+        private final int funcCode;
+        final private static Map<Integer,FunctionsEnum> map = new HashMap<>();
+
+        static {
+            for (FunctionsEnum pageType : FunctionsEnum.values()) {
+                map.put(pageType.funcCode, pageType);
+            }
+        }
+
+        public static FunctionsEnum valueOfInt(int funcCode){
+            return map.get(funcCode);
+        }
+
+        FunctionsEnum(int funcCode){
+            this.funcCode=funcCode;
+        }
+        //endregion
+
     }
+    //endregion
+
+    //region properties
+    String IDNP,name,surname; // not String because we can still modify it (in the app at least)
+    LocalDate birthDate,employedOn;
+    double salary;
+    GenderEnum gender; // even if the chance is small, we will still be able to change a person's gender
     FunctionsEnum function;
     //endregion
 
@@ -38,7 +60,7 @@ public class Employees {
         this.gender=gender;
         this.salary=salary;
         this.function=function;
-    };
+    }
 
     //endregion
 
@@ -54,12 +76,13 @@ public class Employees {
     //endregion
 
     //region setters
-    void setName(String name){this.name=name;}
-    void setSurname(String surname){this.surname=surname;}
-    void setBirthDate(LocalDate birthDate){this.birthDate=birthDate;}
-    void setEmployedOn(LocalDate employedOn){this.employedOn=employedOn;}
-    void setGender(GenderEnum gender){this.gender=gender;}
-    void setSalary(double salary){this.salary=salary;}
-    void setFunction(FunctionsEnum function){this.function=function;}
+    public void setIDNP(String IDNP){this.IDNP=IDNP;}
+    public void setName(String name){this.name=name;}
+    public void setSurname(String surname){this.surname=surname;}
+    public void setBirthDate(LocalDate birthDate){this.birthDate=birthDate;}
+    public void setEmployedOn(LocalDate employedOn){this.employedOn=employedOn;}
+    public void setGender(GenderEnum gender){this.gender=gender;}
+    public void setSalary(double salary){this.salary=salary;}
+    public void setFunction(FunctionsEnum function){this.function=function;}
     //endregion
 }

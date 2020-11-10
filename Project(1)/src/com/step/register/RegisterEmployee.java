@@ -16,10 +16,9 @@ public class RegisterEmployee {
         String name,surname,IDNP;
         LocalDate birthDate,employedOn;
         Employees.GenderEnum gender=Employees.GenderEnum.Male;//default values
-        Employees.FunctionsEnum function=Employees.FunctionsEnum.Helpdesk;//default values
+        Employees.FunctionsEnum function=Employees.FunctionsEnum.valueOfInt(1);//default values
         double salary;
-
-        int optionTemp=0;
+        int optionTemp;
         //endregion
 
         //region enter every field
@@ -29,13 +28,23 @@ public class RegisterEmployee {
         do {
             System.out.println("Enter the IDNP:");
             IDNP = sc.nextLine();
-            for (Employees em : EmployeeManager.getEmployees()) {
-                if (em.getIDNP().equals(IDNP)) {
-                    foundMatch = true;
-                    System.out.println("This IDNP already exists.Any key to try again.");
-                    sc.nextLine();
-                    break;
+            if(EmployeeManager.getNrOfEmployees()>0){
+                for(int i=0;i<EmployeeManager.getNrOfEmployees();i++){
+                    if (EmployeeManager.getEmployees()[i].getIDNP().equals(IDNP)) {
+                        foundMatch = true;
+                        System.out.println("This IDNP already exists.Any key to try again.");
+                        sc.nextLine();
+                        break;
+                    }
                 }
+//            for (Employees em : EmployeeManager.getEmployees()) {             //can't use this type of for because we are using an array
+//                if (em.getIDNP().equals(IDNP)) {
+//                    foundMatch = true;
+//                    System.out.println("This IDNP already exists.Any key to try again.");
+//                    sc.nextLine();
+//                    break;
+//                }
+//            }
             }
 
         } while (foundMatch);
@@ -82,7 +91,7 @@ public class RegisterEmployee {
         while(true){
             System.out.println("Enter the salary *(min:4000/max:12000)* :");
             salary=sc.nextDouble();
-            if(salary>=4000||salary<=12000)break;
+            if(salary>=4000&&salary<=12000)break;
             System.out.println("Invalid salary value. Try again.");
             sc.nextLine();
         }
@@ -94,16 +103,19 @@ public class RegisterEmployee {
         while(!availableFunc){
             DisplayUI.displayFunctionOptions("Enter the function");
             optionTemp=sc.nextInt();
-            switch(optionTemp){
-                case 1: function= Employees.FunctionsEnum.SysEng;availableFunc=true;break;
-                case 2: function=Employees.FunctionsEnum.NetEng;availableFunc=true;break;
-                case 3: function=Employees.FunctionsEnum.SysAdmin;availableFunc=true;break;
-                case 4: function=Employees.FunctionsEnum.ProjMan;availableFunc=true;break;
-                case 5: function=Employees.FunctionsEnum.Helpdesk;availableFunc=true;break;
-                case 6: function=Employees.FunctionsEnum.DesktopSupport;availableFunc=true;break;
+            if(optionTemp>=1&&optionTemp<=6) {
+                function = Employees.FunctionsEnum.valueOfInt(optionTemp);
+                availableFunc=true;
             }
+//            switch(optionTemp){
+//                case 1: function= Employees.FunctionsEnum.SysEng;availableFunc=true;break;
+//                case 2: function=Employees.FunctionsEnum.NetEng;availableFunc=true;break;
+//                case 3: function=Employees.FunctionsEnum.SysAdmin;availableFunc=true;break;
+//                case 4: function=Employees.FunctionsEnum.ProjMan;availableFunc=true;break;
+//                case 5: function=Employees.FunctionsEnum.Helpdesk;availableFunc=true;break;
+//                case 6: function=Employees.FunctionsEnum.DesktopSupport;availableFunc=true;break;
+//            }
             if(!availableFunc){System.out.println("Non-existent value.Try Again");sc.nextLine();}
-
         }
 
         //endregion
@@ -115,6 +127,4 @@ public class RegisterEmployee {
         EmployeeManager.addEmployee(empTemp);
         //endregion
     }
-
-
 }
