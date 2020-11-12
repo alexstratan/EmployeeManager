@@ -1,13 +1,12 @@
-package com.step.register;
+package com.step.crud;
 
-import com.step.data.dataManager.EmployeeManager;
 import com.step.data.Employees;
-import com.step.ui.DisplayUI;
+import com.step.ui.DisplayingUI;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class RegisterEmployee {
+public class EmployeeInitializer {
 
     public static void registerNewEmployee(){
         Scanner sc=new Scanner(System.in);
@@ -101,7 +100,7 @@ public class RegisterEmployee {
         //region function
         boolean availableFunc=false;
         while(!availableFunc){
-            DisplayUI.displayFunctionOptions("Enter the function");
+            DisplayingUI.displayFunctionOptions("Enter the function");
             optionTemp=sc.nextInt();
             if(optionTemp>=1&&optionTemp<=6) {
                 function = Employees.FunctionsEnum.valueOfInt(optionTemp);

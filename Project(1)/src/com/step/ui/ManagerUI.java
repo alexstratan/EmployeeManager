@@ -18,34 +18,34 @@ public class ManagerUI {
     }
 
     private static int MainMenu()  {
-        DisplayUI.displayMainMenu();
+        DisplayingUI.displayMainMenu();
         int option=sc.nextInt();
-        DisplayUI.clearScreen();
+        DisplayingUI.clearScreen();
 
         while(true){
             switch(option){
-                case 1: return 1; //Create new employees
-                case 2: levelUI=1; return 2; //Read employees
-                case 3: levelUI=2; return 3; //Update employee data
-                case 4: return 4; //Fire an employee
+                case 1: return 1;
+                case 2: levelUI=1; return 2;
+                case 3: levelUI=2; return 3;
+                case 4: levelUI=0; return 4;
                 case 5: return 5;
             }
         }
     }
 
     private static int SearchEmployee(){
-        DisplayUI.displaySearchMenu();
+        DisplayingUI.displaySearchMenu();
         int option=sc.nextInt();
-        DisplayUI.clearScreen();
+        DisplayingUI.clearScreen();
 
         if(option==5){levelUI=0;}
         return option+10;
     }
 
     private static int UpdateEmployee(){
-        DisplayUI.displayUpdateMenu();
+        DisplayingUI.displayUpdateMenu();
         int option=sc.nextInt();
-        DisplayUI.clearScreen();
+        DisplayingUI.clearScreen();
 
         if(option==8){levelUI=0;}
         return 20+option;

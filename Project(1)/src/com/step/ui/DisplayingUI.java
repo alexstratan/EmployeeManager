@@ -1,11 +1,7 @@
 package com.step.ui;
 import com.step.data.Employees;
 
-public class DisplayUI {
-
-    public static void readByIdMessage(){
-        System.out.println("Enter the id (index) :");
-    }
+public class DisplayingUI {
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
